@@ -76,4 +76,6 @@ public class FoodProduct {
 	@ManyToOne
 	@JoinColumn
 	Menu menu;
-}
+	
+	}
+
