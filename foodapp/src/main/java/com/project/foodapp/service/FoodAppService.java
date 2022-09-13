@@ -7,14 +7,22 @@ import org.springframework.stereotype.Service;
 
 import com.project.foodapp.dao.ItemDao;
 import com.project.foodapp.dao.UserDao;
+
+import com.project.foodapp.dto.FoodProduct;
+
 import com.project.foodapp.dto.Item;
 import com.project.foodapp.dto.User;
+import com.project.foodapp.dao.FoodProductDao;
 
 @Service
 public class FoodAppService {
 
 	@Autowired
 	UserDao userDao;
+
+	
+	@Autowired
+	FoodProductDao foodProductDao;
 	@Autowired
 	ItemDao itemDao;
 
@@ -22,6 +30,25 @@ public class FoodAppService {
 		
 		return userDao.addUser(user);
 	}
+
+
+	public FoodProduct addProduct(FoodProduct product) {
+		return foodProductDao.addProduct(product);
+	}
+
+	public void deleteProduct(int id) {
+		 foodProductDao.deleteProduct(id);
+	}
+	
+
+	public List<FoodProduct> getProduct() {
+		return foodProductDao.getProduct();
+	}
+
+	public FoodProduct updateProduct(FoodProduct product) {
+		return foodProductDao.updateProduct(product);
+	}
+
 
 	public void deleteUser(int id) {
 		// TODO Auto-generated method stub
@@ -57,4 +84,5 @@ public class FoodAppService {
 		// TODO Auto-generated method stub
 		return itemDao.addItem(item);
 	}
+
 }
