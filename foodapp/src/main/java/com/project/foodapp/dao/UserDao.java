@@ -22,6 +22,7 @@ public class UserDao {
 		repository.deleteById(id);
 		System.out.println("User Deleted with id :" +id);
 	}
+	
 	public User updateUser(User user) {
 		// TODO Auto-generated method stub
 		return repository.save(user);
@@ -31,4 +32,7 @@ public class UserDao {
 		return repository.findAll();
 	}
 
+	public User getUserById(int id) {
+		return repository.getById(id);
+	}
 }
