@@ -1,33 +1,40 @@
-package com.project.foodapp.dao;
+package com.project.foodapp.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import com.project.foodapp.dao.MenuDao;
 import com.project.foodapp.dto.Menu;
-import com.project.foodapp.repository.MenuRepository;
 
-@Repository
-public class MenuDao {
+@Service
+public class MenuService {
 
 	@Autowired
-	MenuRepository menuRepository;
+	MenuDao menuDao;
+	
 	public Menu addMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		return menuRepository.save(menu);
-	}
-	public List<Menu> getMenu() {
-		// TODO Auto-generated method stub
-		return menuRepository.findAll();
-	}
-	public void deleteMenu(int id) {
-		// TODO Auto-generated method stub
-		menuRepository.deleteById(id);
-	}
-	public Menu getMenuById(int menu_id) {
-		// TODO Auto-generated method stub
-		return menuRepository.getById(menu_id);
+		return menuDao.addMenu(menu);
 	}
 
+
+	public List<Menu> getMenu() {
+		// TODO Auto-generated method stub
+		
+		return menuDao.getMenu();
+	}
+
+
+	public void deleteMenu(int id) {
+		// TODO Auto-generated method stub
+		menuDao.deleteMenu(id);
+	}
+
+
+	public Menu getMenuById(int menu_id) {
+		// TODO Auto-generated method stub
+		return menuDao.getMenuById(menu_id);
+	}
 }
