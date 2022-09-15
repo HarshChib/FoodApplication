@@ -10,15 +10,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.foodapp.dto.FoodOrder;
-import com.project.foodapp.service.FoodAppService;
+import com.project.foodapp.dto.Menu;
+import com.project.foodapp.dto.User;
+import com.project.foodapp.service.FoodOrderService;
+import com.project.foodapp.service.MenuService;
+import com.project.foodapp.service.UserService;
 
 @RestController
 public class FoodOrderController {
     @Autowired
-	FoodAppService service;
+	FoodOrderService service;
 	
-	@PostMapping("/addOrder")
-	public FoodOrder addOrder(@RequestBody FoodOrder order) {
+    @Autowired
+    UserService userService;
+    
+	@PostMapping("/addOrder/{user_id}")
+	public FoodOrder addOrder(@RequestBody FoodOrder order,@PathVariable int user_id) {
+		User user = userService.getUserById(user_id);
+		order.setUser(user);
 		return service.addOrder(order);
 	}
 	

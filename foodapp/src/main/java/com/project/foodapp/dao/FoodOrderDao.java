@@ -32,6 +32,10 @@ FoodOrderRepository repository;
 			return"No order is deleted";
 		}
 	}
+	public FoodOrder getFoodOrderById(int foodorder_id) {
+		// TODO Auto-generated method stub
+		return repository.getById(foodorder_id);
+	}
 	
 	
 

@@ -1,81 +1,76 @@
 package com.project.foodapp.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class FoodProduct {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String type;
 	private String about;
+	private String availability;
+	private int price;
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "menu_id",referencedColumnName = "id")
+	private Menu menu;
+	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
 	public String getAbout() {
 		return about;
 	}
-
 	public void setAbout(String about) {
 		this.about = about;
 	}
-
-	public boolean isAvailability() {
+	public String getAvailability() {
 		return availability;
 	}
-
-	public void setAvailability(boolean availability) {
+	public void setAvailability(String availability) {
 		this.availability = availability;
 	}
-
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
-
 	public Menu getMenu() {
 		return menu;
 	}
-
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
-
-	private boolean availability;
-	private String price;
 	
-	@ManyToOne
-	@JoinColumn
-	Menu menu;
-	
-	}
-
+}

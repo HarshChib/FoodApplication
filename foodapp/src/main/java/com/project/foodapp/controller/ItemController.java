@@ -12,17 +12,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.foodapp.dto.FoodOrder;
 import com.project.foodapp.dto.Item;
-import com.project.foodapp.service.FoodAppService;
+import com.project.foodapp.service.FoodOrderService;
+import com.project.foodapp.service.ItemService;
 
 @RestController
 public class ItemController {
 
 	@Autowired
-	FoodAppService service;
+	ItemService service;
 
-	@PostMapping("/additem")
-	public Item addItem(@RequestBody Item item) {
+	@Autowired
+	FoodOrderService foodOrderService;
+	
+	@PostMapping("/additem/{foodorder_id}")
+	public Item addItem(@RequestBody Item item,@PathVariable int foodorder_id) {
+		FoodOrder foodOrder=foodOrderService.getFoodOrderById(foodorder_id);
+		item.setFoodOrder(foodOrder);
 		return service.addItem(item);
 	}
 
