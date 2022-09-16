@@ -29,7 +29,7 @@ public class Menu {
 	private List<FoodProduct> foodProducts;
 	
 	@JsonBackReference
-	@OneToOne(cascade  = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn
 	private User user;
 

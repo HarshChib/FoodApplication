@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.foodapp.dto.FoodProduct;
 import com.project.foodapp.dto.Menu;
+import com.project.foodapp.dto.User;
 import com.project.foodapp.service.FoodProductService;
 import com.project.foodapp.service.MenuService;
+import com.project.foodapp.service.UserService;
 
 @RestController
 
@@ -24,11 +26,12 @@ public class ProductController {
 	FoodProductService service;
 	
 	@Autowired
-	MenuService menuService;
+	UserService userService;
 	
-	@PostMapping("/addproduct/{menu_id}")
-	public FoodProduct addProduct(@RequestBody FoodProduct product ,@PathVariable int menu_id) {
-		Menu menu=menuService.getMenuById(menu_id);
+	@PostMapping("/addproduct/{user_id}")
+	public FoodProduct addProduct(@RequestBody FoodProduct product ,@PathVariable int user_id) {
+		User user = userService.getUserById(user_id);
+		Menu menu=user.getMenu();
 		product.setMenu(menu);
 		return service.addProduct(product);
 	}
