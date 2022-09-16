@@ -1,5 +1,7 @@
 package com.project.foodapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +39,10 @@ public class FoodOrderController {
 	}
 	
 	@GetMapping("/order/{id}")
-	public FoodOrder getOrderById(@PathVariable("id")  int id) {
-		return service.getOrderById(id);
+	public List<FoodOrder> getOrderById(@PathVariable("id")  int id) {
+		User user=userService.getUserById(id);
+		return user.getFoodOrders();
+
 	}
 	
 	@DeleteMapping("/delete/order/{id}")
