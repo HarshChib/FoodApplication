@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.foodapp.dto.Menu;
 import com.project.foodapp.dto.User;
 import com.project.foodapp.service.UserService;
 @RestController
@@ -19,10 +20,20 @@ public class UserController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	MenuController controller;
 
+	@PostMapping("/loginuser")
+	public User userLogin(@RequestBody User user){
+		return service.userLogin(user);
+	}
 	@PostMapping("/adduser")
 	public User addUser(@RequestBody User user) {
-		return service.addUser(user);
+		user=service.addUser(user);
+		Menu menu=new Menu();
+		controller.addMenu(menu, user.getId());
+		return user;
 	}
 
 	@DeleteMapping("/deleteuser/{id}")

@@ -31,7 +31,7 @@ public class FoodOrderController {
 		return service.addOrder(order);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/updateorder")
 	public FoodOrder updateOrder(@RequestBody FoodOrder order) {
 		return service.updateOrder(order);
 	}

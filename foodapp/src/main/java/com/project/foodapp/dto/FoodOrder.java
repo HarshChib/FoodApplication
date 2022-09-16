@@ -25,7 +25,7 @@ public class FoodOrder {
 	private String orderCreatedTime;
 	private String orderDeliveryTime;
 	private String customerName;
-	private int contactNumber;
+	private long contactNumber;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
@@ -91,11 +91,11 @@ public class FoodOrder {
 		this.customerName = customerName;
 	}
 
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 

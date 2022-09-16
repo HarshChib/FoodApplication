@@ -36,4 +36,7 @@ public class UserService {
 	public User getUserById(int id) {
 		return userDao.getUserById(id);
 	}
+	public User userLogin(User user) {
+		return userDao.userLogin(user);
+	}
 }
