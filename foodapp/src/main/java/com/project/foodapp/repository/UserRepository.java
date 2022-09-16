@@ -6,4 +6,5 @@ import com.project.foodapp.dto.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 
+	public User getByEmail(String email);
 }
