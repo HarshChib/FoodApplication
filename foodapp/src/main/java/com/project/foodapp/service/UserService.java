@@ -18,9 +18,9 @@ public class UserService {
 
 		return userDao.addUser(user);
 	}
-	public User updateUser(User user) {
+	public User updateUser(User user, int id) {
 		// TODO Auto-generated method stub
-		return userDao.updateUser(user);
+		return userDao.updateUser(user,id);
 	}
 
 	public List<User> getUsers() {
