@@ -23,8 +23,12 @@ public class UserDao {
 		System.out.println("User Deleted with id :" +id);
 	}
 	
-	public User updateUser(User user) {
+	public User updateUser(User updated_user, int id) {
 		// TODO Auto-generated method stub
+		User user=getUserById(id);
+		user.setName(updated_user.getName());
+		user.setPassword(updated_user.getPassword());
+		user.setRole(updated_user.getRole());
 		return repository.save(user);
 	}
 	public List<User> getUsers() {
@@ -33,7 +37,7 @@ public class UserDao {
 	}
 
 	public User getUserById(int id) {
-		return repository.getById(id);
+		return repository.findById(id).get();
 	}
 	
 	public User getByEmail(String email) {

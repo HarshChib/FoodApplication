@@ -42,11 +42,15 @@ public class UserController {
 		return "Deleted User with Id : "+id;
 	}
 
-	@PutMapping("/updateuser")
-	public User updateUser(@RequestBody User user) {
-		return service.updateUser(user);
+	@PutMapping("/updateuser/{id}")
+	public User updateUser(@RequestBody User user,@PathVariable("id") int id) {
+		return service.updateUser(user,id);
 	}
 
+	@GetMapping("/getuser/{id}")
+	public User getUserById(@PathVariable("id") int id) {
+		return service.getUserById(id);
+	}
 	@GetMapping("/getusers")
 	public List<User> getUsers() {
 		return service.getUsers();
