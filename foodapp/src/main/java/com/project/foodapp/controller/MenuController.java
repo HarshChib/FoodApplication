@@ -37,6 +37,11 @@ public class MenuController {
 		return service.getMenu();
 	}
 	
+	@GetMapping("/getmenu/{user_id}")
+	public Menu getMenuByUserId(@PathVariable int user_id) {
+    return userService.getUserById(user_id).getMenu();
+	}
+	
 	@DeleteMapping("/deletemenu/{id}")
 	public void deleteMenu(
 			@PathVariable int id){
