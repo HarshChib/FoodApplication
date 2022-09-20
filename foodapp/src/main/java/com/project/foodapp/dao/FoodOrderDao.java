@@ -21,19 +21,15 @@ public class FoodOrderDao {
 	public FoodOrder updateOrder(FoodOrder order) {
 		// TODO Auto-generated method stub
 		FoodOrder foodOrder = getOrderById(order.getId());
-		int total = 0;
-		for (Item i : foodOrder.getItems()) {
-			total += (i.getPrice()*i.getQuantity());
-		}
-		foodOrder.setTotalPrice(total);
+		foodOrder.setTotalPrice(order.getTotalPrice());
 		foodOrder.setOrderDeliveryTime(new java.util.Date() + "");
-		foodOrder.setStatus(order.isStatus());
+		foodOrder.setStatus(true);
 		return repository.save(foodOrder);
 	}
 
 	public FoodOrder getOrderById(int id) {
 		// TODO Auto-generated method stub
-		return repository.getById(id);
+		return repository.findById(id).get();
 	}
 
 	public String deleteOrder(int id) {
@@ -49,7 +45,8 @@ public class FoodOrderDao {
 
 	public FoodOrder getFoodOrderById(int foodorder_id) {
 		// TODO Auto-generated method stub
-		return repository.getById(foodorder_id);
+		FoodOrder order = getOrderById(foodorder_id);
+		return order;
 	}
 
 }
