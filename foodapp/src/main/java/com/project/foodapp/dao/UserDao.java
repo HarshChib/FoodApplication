@@ -46,6 +46,8 @@ public class UserDao {
 	public User userLogin(User user) {
 		// TODO Auto-generated method stub
 		User check=getByEmail(user.getEmail());
+		if(check==null)
+			return check;
 		if(check.getPassword().equals(user.getPassword()))
 			return check;
 		return null;
