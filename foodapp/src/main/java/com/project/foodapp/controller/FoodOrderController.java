@@ -45,11 +45,15 @@ public class FoodOrderController {
 
 	}
 	
-	@DeleteMapping("/delete/order/{id}")
-	public String deleteOrder(@PathVariable("id") int id) {
-		return service.deleteOrder(id);
+	@DeleteMapping("/delete/order/{user_id}")
+	public String deleteOrder(@PathVariable("user_id") int user_id) {
+		return service.deleteOrder(user_id);
 	}
 	
+	@GetMapping("getorderbyid/{order_id}")
+	public FoodOrder getOrderByOrderId(@PathVariable("order_id") int order_id) {
+		return service.getFoodOrderById(order_id);
+	}
 	
 	
 }
