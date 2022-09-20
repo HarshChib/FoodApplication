@@ -3,6 +3,7 @@ package com.project.foodapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.project.foodapp.service.FoodOrderService;
 import com.project.foodapp.service.MenuService;
 import com.project.foodapp.service.UserService;
 
+;
 @RestController
 public class FoodOrderController {
     @Autowired
@@ -26,7 +28,8 @@ public class FoodOrderController {
     @Autowired
     UserService userService;
     
-	@PostMapping("/addOrder/{user_id}")
+   
+	@PostMapping(value="/addOrder/{user_id}")
 	public FoodOrder addOrder(@RequestBody FoodOrder order,@PathVariable int user_id) {
 		User user = userService.getUserById(user_id);
 		order.setUser(user);
