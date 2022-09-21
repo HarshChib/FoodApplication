@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.foodapp.dto.EmailDetails;
 import com.project.foodapp.dto.FoodOrder;
-import com.project.foodapp.dto.Menu;
 import com.project.foodapp.dto.User;
+import com.project.foodapp.service.EmailService;
+import com.project.foodapp.service.EmailServiceImpl;
 import com.project.foodapp.service.FoodOrderService;
-import com.project.foodapp.service.MenuService;
 import com.project.foodapp.service.UserService;
 
 ;
@@ -28,17 +29,31 @@ public class FoodOrderController {
     @Autowired
     UserService userService;
     
+<<<<<<< HEAD
    
 	@PostMapping(value="/addOrder/{user_id}")
+=======
+    @Autowired
+    private EmailServiceImpl emailService;
+    
+	@PostMapping("/addOrder/{user_id}")
+>>>>>>> 6f3d73b23f69ded4ba89e25392bc845152c09fed
 	public FoodOrder addOrder(@RequestBody FoodOrder order,@PathVariable int user_id) {
 		User user = userService.getUserById(user_id);
 		order.setUser(user);
 		return service.addOrder(order);
 	}
 	
-	@PutMapping("/updateorder")
-	public FoodOrder updateOrder(@RequestBody FoodOrder order) {
-		return service.updateOrder(order);
+	@PutMapping("/updateorder/{user_id}")
+	public FoodOrder updateOrder(@RequestBody FoodOrder order,@PathVariable int user_id) {
+		FoodOrder updated_order=service.updateOrder(order);;
+		User user=userService.getUserById(user_id);
+		EmailDetails details=new EmailDetails();
+		details.setRecipient(user.getEmail());
+		details.setMsgBody(updated_order.toString());
+		details.setSubject("Order finalized for Customer with name : "+updated_order.getCustomerName());
+		System.out.println(emailService.sendSimpleMail(details));
+		return updated_order;
 	}
 	
 	@GetMapping("/order/{id}")

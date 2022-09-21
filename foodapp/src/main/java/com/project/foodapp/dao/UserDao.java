@@ -11,10 +11,16 @@ import com.project.foodapp.repository.UserRepository;
 @Repository
 public class UserDao {
 
+
 	@Autowired
 	UserRepository repository;
 	public User addUser(User user) {
-		
+		String password=user.getPassword();
+		String saltvalue = PassBasedEnc.getSaltvalue(30);
+		String encryptedpassword = PassBasedEnc.generateSecurePassword(password, saltvalue);
+		password=saltvalue+encryptedpassword;
+		user.setPassword(password);
+		user.setEmail(user.getEmail().toLowerCase());
 		return repository.save(user);
 	}
 	public void deleteUser(int id) {
@@ -25,10 +31,15 @@ public class UserDao {
 	
 	public User updateUser(User updated_user, int id) {
 		// TODO Auto-generated method stub
+		String password=updated_user.getPassword();
+		String saltvalue = PassBasedEnc.getSaltvalue(30);
+		String encryptedpassword = PassBasedEnc.generateSecurePassword(password, saltvalue);
+		password=saltvalue+encryptedpassword;
 		User user=getUserById(id);
+		user.setPassword(password);
 		user.setName(updated_user.getName());
-		user.setPassword(updated_user.getPassword());
-		user.setRole(updated_user.getRole());
+		if(updated_user.getRole()!=null)
+			user.setRole(updated_user.getRole());
 		return repository.save(user);
 	}
 	public List<User> getUsers() {
@@ -45,11 +56,17 @@ public class UserDao {
 	}
 	public User userLogin(User user) {
 		// TODO Auto-generated method stub
-		User check=getByEmail(user.getEmail());
-		if(check==null)
-			return check;
-		if(check.getPassword().equals(user.getPassword()))
-			return check;
+		User existing=getByEmail(user.getEmail().toLowerCase());
+		if(existing==null)
+			return existing;
+		if(PassBasedEnc.verifyUserPassword(user.getPassword(),existing.getPassword().substring(30),existing.getPassword().substring(0,30)))
+			return existing;
 		return null;
+	}
+	public User updateByManager(int user_id, String role) {
+		// TODO Auto-generated method stub
+		User user=getUserById(user_id);
+		user.setRole(role);
+		return repository.save(user);
 	}
 }

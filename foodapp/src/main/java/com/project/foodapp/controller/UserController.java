@@ -56,6 +56,13 @@ public class UserController {
 		return service.getUsers();
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	@PutMapping("/updatebymanager/{user_id}/{role}")
+	public User updateByManager(@PathVariable("user_id") int user_id,@PathVariable("role") String role) {
+		return service.updateByManager(user_id,role);
+	}
+>>>>>>> 6f3d73b23f69ded4ba89e25392bc845152c09fed
 
 }

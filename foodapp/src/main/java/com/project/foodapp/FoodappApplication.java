@@ -11,8 +11,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class FoodappApplication {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FoodappApplication.class, args);
 	}
 
+	
 }
