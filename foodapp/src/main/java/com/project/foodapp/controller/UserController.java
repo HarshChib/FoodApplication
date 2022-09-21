@@ -55,5 +55,10 @@ public class UserController {
 	public List<User> getUsers() {
 		return service.getUsers();
 	}
+	
+	@PutMapping("/updatebymanager/{user_id}/{role}")
+	public User updateByManager(@PathVariable("user_id") int user_id,@PathVariable("role") String role) {
+		return service.updateByManager(user_id,role);
+	}
 
 }
