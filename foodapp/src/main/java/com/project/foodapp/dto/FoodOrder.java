@@ -39,6 +39,13 @@ public class FoodOrder {
 		return items;
 	}
 
+	@Override
+	public String toString() {
+		return "Order Id =" + id + ",\n status =" + status + ",\n totalPrice =" + totalPrice + ",\n orderCreatedTime ="
+				+ orderCreatedTime + ",\n orderDeliveryTime= " + orderDeliveryTime + ",\n customerName =" + customerName
+				+ ",\n contactNumber=" + contactNumber + ",\n user=" + user + ", items=" + items.toString() + "]";
+	}
+
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
